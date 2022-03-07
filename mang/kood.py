@@ -119,82 +119,86 @@ while not done:
                 for key in key_list:
                     if key.rect.collidepoint(pos):
                         key.clicked = True
-                if kontroll.collidepoint(pos):
-                    for cols in range(len(collisions)):
-                        answer = collisions[voti[cols]][0]
-                        key = voti[cols]
-                        if pygame.Rect.colliderect(answer.rect,key.rect) and key.eriline == False:
-                            answer.tekst = key.tekst
-                    for cols in range(len(collisions)):
-                        answer = collisions[voti[cols]][0]
-                        key = voti[cols]
-                        if key.eriline == True and pygame.Rect.colliderect(answer.rect,key.rect):
-                            answer.tekst += key.tekst
-                    kontrollima = []
-                    for s in range(len(collisions)):
-                        kontrollima += ["g"]
-                    for cols in range(len(collisions)):
-                        answer = collisions[voti[cols]][0]
-                        key = voti[cols]
-                        if key.eriline == False:
-                            try:
-                                kontrollima[answer.rida] = answer.tekst
-                            except:
-                                pass
-                    while "g" in kontrollima:
-                        if "g" in kontrollima:
-                            kontrollima.remove("g")
-                    if kontrollima in kontroll_vastused and kontroll_vastused != summaruudu_vastused:
-                        del key_list
-                        del answer_list
-                        key_list = pygame.sprite.Group()
-                        answer_list = pygame.sprite.Group()
-                        ulesanne, kontroll_vastused = lisa_valem(answer_list, key_list, "Summa ruudu valem on", summaruudu_valem, summaruudu_vastused)
-                        teksti_pilt = font_sort.render(ulesanne, False, (255,255,255))
-                    elif kontrollima in kontroll_vastused:
-                        del key_list
-                        del answer_list
-                        key_list = pygame.sprite.Group()
-                        answer_list = pygame.sprite.Group()
-                        teksti_pilt = font_sort.render("TUBLI TÖÖ", False, (255,255,255))
-                    else:
-                        pass
-                    oige_vastus = []
+#                 if kontroll.collidepoint(pos):
+#                     for cols in range(len(collisions)):
+#                         answer = collisions[voti[cols]][0]
+#                         key = voti[cols]
+#                         if pygame.Rect.colliderect(answer.rect,key.rect) and key.eriline == False:
+#                             answer.tekst = key.tekst
+#                     for cols in range(len(collisions)):
+#                         answer = collisions[voti[cols]][0]
+#                         key = voti[cols]
+#                         if key.eriline == True and pygame.Rect.colliderect(answer.rect,key.rect):
+#                             answer.tekst += key.tekst
+#                     kontrollima = []
+#                     for s in range(len(collisions)):
+#                         kontrollima += ["g"]
+#                     for cols in range(len(collisions)):
+#                         answer = collisions[voti[cols]][0]
+#                         key = voti[cols]
+#                         if key.eriline == False:
+#                             try:
+#                                 kontrollima[answer.rida] = answer.tekst
+#                             except:
+#                                 pass
+#                     while "g" in kontrollima:
+#                         if "g" in kontrollima:
+#                             kontrollima.remove("g")
+#                     if kontrollima in kontroll_vastused and kontroll_vastused != summaruudu_vastused:
+#                         del key_list
+#                         del answer_list
+#                         key_list = pygame.sprite.Group()
+#                         answer_list = pygame.sprite.Group()
+#                         ulesanne, kontroll_vastused = lisa_valem(answer_list, key_list, "Summa ruudu valem on", summaruudu_valem, summaruudu_vastused)
+#                         teksti_pilt = font_sort.render(ulesanne, False, (255,255,255))
+#                     elif kontrollima in kontroll_vastused:
+#                         del key_list
+#                         del answer_list
+#                         key_list = pygame.sprite.Group()
+#                         answer_list = pygame.sprite.Group()
+#                         teksti_pilt = font_sort.render("TUBLI TÖÖ", False, (255,255,255))
+#                     else:
+#                         pass
+#                     oige_vastus = []
+                    
+######################
+        
         if event.type == pygame.MOUSEBUTTONUP:
             for key in key_list:
                 key.clicked = False
                 if key.spot == False:
                    key.rect.y = key.originaly
                    key.rect.x = key.originalx                  
-    collisions = pygame.sprite.groupcollide(key_list, answer_list, False, False, collided = None)
-    voti = list(collisions)
-    val_list = list(collisions.values())
-    if len(collisions) == 0:
-        for keys in key_list:
-            keys.spot = False
-    for keys in key_list:
-        if keys not in voti and keys.spot == True:
-            keys.spot = False
-            drag_id = 0
-    for answers in answer_list:
-        if answers not in val_list and answers.tekst != "":
-            answers.tekst = ""
-            drag_id = 0
-    for cols in range(len(collisions)):
-        answer = collisions[voti[cols]][0]
-        key = voti[cols]
-        if pygame.Rect.colliderect(answer.rect,key.rect) and key.spot == False:
-            answer.tekst = key.tekst
-            key.spot = True
-            key.rect.x = answer.rect.x
-            key.rect.y = answer.rect.y
-        elif pygame.Rect.colliderect(answer.rect,key.rect) and key.eriline ==  False:
-            answer.tekst = key.tekst
-            key.rect.x = answer.rect.x
-            key.rect.y = answer.rect.y
-        if pygame.Rect.colliderect(answer.rect,key.rect) and key.eriline  == True:
-            key.rect.x = answer.rect.x
-            key.rect.y = answer.rect.y
+#     collisions = pygame.sprite.groupcollide(key_list, answer_list, False, False, collided = None)
+#     voti = list(collisions)
+#     val_list = list(collisions.values())
+#     if len(collisions) == 0:
+#         for keys in key_list:
+#             keys.spot = False
+#     for keys in key_list:
+#         if keys not in voti and keys.spot == True:
+#             keys.spot = False
+#             drag_id = 0
+#     for answers in answer_list:
+#         if answers not in val_list and answers.tekst != "":
+#             answers.tekst = ""
+#             drag_id = 0
+#     for cols in range(len(collisions)):
+#         answer = collisions[voti[cols]][0]
+#         key = voti[cols]
+#         print( collisions[voti[cols]][0])
+#         if pygame.Rect.colliderect(answer.rect,key.rect) and key.spot == False:
+#             answer.tekst = key.tekst
+#             key.spot = True
+#             key.rect.x = answer.rect.x
+#             key.rect.y = answer.rect.y
+#         elif pygame.Rect.colliderect(answer.rect,key.rect) and key.eriline ==  False:
+#             answer.tekst = key.tekst
+#             key.rect.x = answer.rect.x
+#             key.rect.y = answer.rect.y
+#         if pygame.Rect.colliderect(answer.rect,key.rect) and key.eriline  == True:
+#             key.rect.x = answer.rect.x
+#             key.rect.y = answer.rect.y
 
     for key in key_list:
         if key.clicked == True:
