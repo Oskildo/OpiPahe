@@ -19,12 +19,18 @@ pyth_lause = "Kirjuta pythagorase teoreem, kus c on hüpotenuus."
 pyth_valem =["c )square", "=","a )square","+", "b )square"]
 pyth_vastused = [["2a+b2", "a2+b2", "2b+a2", "b2+a2"],["2c", "c2"]]
 
-summaruudu_lause = "Kirjuta summaruudu valem:"
-summaruudu_valem = ["(", "a", "+", "b",") )square","=", "a )square", "+", "2ab","+","b )square"]
-summaruudu_vastused =[["(a+b)2","(b+a)2","a(+b)2","b(+a)2"], ["2b+2ab+a2","b2+2ab+a2","2a+2ab+b2", "a2+2ab+b2", "2ab+a2+b2", "2ab+b2+a2"]]
+summaruudu_lause = "Kirjuta summaruudu/vaheruudu valem:"
+summaruudu_valem = ["(", "a", "±", "b",") )square","=", "a )square", "±", "2ab","+","b )square"]
+summaruudu_vastused =[["(a±b)2","(b±a)2","a(±b)2","b(±a)2"], ["2b±2ab+a2","b2±2ab+a2","2a±2ab+b2", "a2±2ab+b2", "±2ab+a2+b2", "±2ab+b2+a2"]]
 
+ruutudevahe_lause ="Kirjuta ruutude vahe valem, kus lahutatakse b a-st"
+ruutudevahe_valem = ["a )square", "-", "b )square", "=", "(", "a", "+", "b", ")", "(","a","-","b", ")"]
+ruutudevahe_vastused =[["2a-b2", "a2-b2"],["(a-b)(a+b)","a(-b)(a+b)","(a-b)a(+b)","a(-b)a(+b)","(a+b)(a-b)","a(+b)(a-b)","(a+b)a(-b)","a(+b)a(-b)"]]
 
-VALEMID =[[pyth_lause, pyth_valem, pyth_vastused],[summaruudu_lause, summaruudu_valem,summaruudu_vastused]]
+ringS_lause = "Kirjuta ringi pindala valem"
+ringS_valem = ["S", "=", "π", "r ) square"]
+ringS_vastused = [["S"],["πr2", "2rπ", "r2π"]]
+VALEMID =[[pyth_lause, pyth_valem, pyth_vastused],[summaruudu_lause, summaruudu_valem,summaruudu_vastused],[ruutudevahe_lause,ruutudevahe_valem,ruutudevahe_vastused],[ringS_lause, ringS_valem, ringS_vastused]]
 ########
 
 mixer.init()
@@ -154,9 +160,9 @@ def lisa_valem(class1, ulessanne_nimi, lisamiseks_valem, oige_vastus):
             increase+=105
     return ulessanne_nimi, oige_vastus
 
-
-ulesanne, kontroll_vastused = lisa_valem(key_list, pyth_lause , pyth_valem, pyth_vastused)
-
+Milline = random.randint(0,(len(VALEMID)-1))
+ulesanne, kontroll_vastused = lisa_valem(key_list, VALEMID[Milline][0] , VALEMID[Milline][1], VALEMID[Milline][2])
+VALEMID.pop(Milline)
 teksti_pilt = font_sort.render(ulesanne, False, (0,0,0))
 
 while not done:
@@ -215,8 +221,13 @@ while not done:
                                 oigeh.play()
                                 del key_list
                                 key_list = pygame.sprite.Group()
-                                ulesanne, kontroll_vastused = lisa_valem(key_list, "Summa ruudu valem on", summaruudu_valem, summaruudu_vastused)
-                                teksti_pilt = font_sort.render(ulesanne, False, (0,0,0))
+                                if len(VALEMID)== 0:
+                                   pass
+                                else:
+                                   Milline = random.randint(0,(len(VALEMID)-1))
+                                   ulesanne, kontroll_vastused = lisa_valem(key_list, VALEMID[Milline][0] , VALEMID[Milline][1], VALEMID[Milline][2])
+                                   VALEMID.pop(Milline)
+                                   teksti_pilt = font_sort.render(ulesanne, False, (0,0,0))
                             else:
                                 flh= mixer.Sound("Wrong_ans.wav")
                                 flh.set_volume(0.15)
