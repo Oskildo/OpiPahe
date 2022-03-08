@@ -28,7 +28,7 @@ ruutudevahe_valem = ["a )square", "-", "b )square", "=", "(", "a", "+", "b", ")"
 ruutudevahe_vastused =[["2a-b2", "a2-b2"],["(a-b)(a+b)","a(-b)(a+b)","(a-b)a(+b)","a(-b)a(+b)","(a+b)(a-b)","a(+b)(a-b)","(a+b)a(-b)","a(+b)a(-b)"]]
 
 ringS_lause = "Kirjuta ringi pindala valem"
-ringS_valem = ["S", "=", "π", "r ) square"]
+ringS_valem = ["S", "=", "π", "r )square"]
 ringS_vastused = [["S"],["πr2", "2rπ", "r2π"]]
 VALEMID =[[pyth_lause, pyth_valem, pyth_vastused],[summaruudu_lause, summaruudu_valem,summaruudu_vastused],[ruutudevahe_lause,ruutudevahe_valem,ruutudevahe_vastused],[ringS_lause, ringS_valem, ringS_vastused]]
 ########
@@ -62,7 +62,7 @@ kontrolly = 350
 pilt1 = pygame.image.load("Check.png")
 
 kontroll = pilt1.get_rect()
-pilt1 = pygame.transform.scale(pilt1,( kontroll.width/3, kontroll.height/3))
+pilt1 = pygame.transform.scale(pilt1,(round(kontroll.width/3), round(kontroll.height/3)))
 kontroll = pilt1.get_rect()
 kontroll.x = kontrollx
 kontroll.y = kontrolly
@@ -72,7 +72,7 @@ clearx = 950
 cleary = 550
 clear = pygame.image.load("Clear.png")
 cleark = clear.get_rect()
-clear = pygame.transform.scale(clear,( cleark.width/3, cleark.height/3))
+clear = pygame.transform.scale(clear,(round(cleark.width/3), round(cleark.height/3)))
 cleark = clear.get_rect()
 ekraani_pind.blit(clear, (clearx, cleary))
 cleark.y =cleary
@@ -81,12 +81,12 @@ cleark.x =clearx
 
 bg = pygame.image.load("Ruudustik.png")
 bgk = bg.get_rect()
-bg =pygame.transform.scale(bg,(bgk.width*1.5, bgk.height*1.5))
+bg =pygame.transform.scale(bg,(round(bgk.width*1.5), round(bgk.height*1.5)))
 ekraani_pind.blit(bg,(0,0))
 
 tbg = pygame.image.load("tbackground.png")
 tbgk = tbg.get_rect()
-tbg =pygame.transform.scale(tbg,(bgk.width*1.5, bgk.height*1.5))
+tbg =pygame.transform.scale(tbg,(round(bgk.width*1.5), round(bgk.height*1.5)))
 ekraani_pind.blit(tbg,(0,0))
 
 startbutx =600-150
@@ -228,6 +228,9 @@ while not done:
                                    ulesanne, kontroll_vastused = lisa_valem(key_list, VALEMID[Milline][0] , VALEMID[Milline][1], VALEMID[Milline][2])
                                    VALEMID.pop(Milline)
                                    teksti_pilt = font_sort.render(ulesanne, False, (0,0,0))
+                                   Vastusetäidetud = []
+                                   Vastuseri  = []
+                                   Vastuserinev = []
                             else:
                                 flh= mixer.Sound("Wrong_ans.wav")
                                 flh.set_volume(0.15)
@@ -275,6 +278,7 @@ while not done:
                 if cleark.collidepoint(pos):
                     Vastusetäidetud = []
                     Vastuseri  = []
+                    Vastuserinev = []
                     for key in key_list:
                         key.spot = False
                         key.rect.y = key.originaly
